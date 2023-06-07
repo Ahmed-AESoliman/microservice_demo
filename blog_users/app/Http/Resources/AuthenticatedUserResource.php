@@ -17,7 +17,7 @@ class AuthenticatedUserResource extends JsonResource
                 'email' => $this->email,
                 'img' => $this->img,
             ],
-            'accessToken' => $this->createToken('auth-token')->accessToken,
+            'accessToken' => $this->createToken('main')->plainTextToken
         ];
     }
 }

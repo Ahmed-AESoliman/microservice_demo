@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Resources\AuthenticatedUserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
 Route::post('resend-verification', [EmailVerificationController::class, 'resend'])->name('verification.resend');
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('user', [AuthController::class, 'user']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    
+    route::post('/logout', [AuthController::class, 'loggout']);
+
 });
